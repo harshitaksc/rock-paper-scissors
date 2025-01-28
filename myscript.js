@@ -1,11 +1,11 @@
-// console.log ("Hello") ;
 
 
-var computerChoice = "none";
+
+let computerChoice = "none";
 function getComputerChoice() {
 
     const Choice = Math.floor(Math.random() * 3);
-    // console.log (Choice)
+   
 
     if (Choice <= 1) {
         return computerChoice = "rock";
@@ -20,24 +20,10 @@ function getComputerChoice() {
 
 }
 
-console.log(getComputerChoice());
 
-var humanChoice = "none";
 
-function getHumanChoice() {
-    humanChoice = prompt("What's your choice?");
-    if (humanChoice.toLowerCase() == "rock") {
-        return humanChoice = "rock"
-    }
-    else if (humanChoice.toLowerCase() == "paper") {
-        return humanChoice = "paper";
-    }
-    else if (humanChoice.toLowerCase() == "scissors" || humanChoice.toLowerCase() == "scissor") {
-        return humanChoice = "scissors";
-    }
-}
 
-// console.log(getHumanChoice());
+
 
 
 let humanScore = 0;
@@ -45,56 +31,84 @@ let computerScore = 0;
 
 
 function playRound(humanChoice, computerChoice) {
+    let result = "";
+
     if (humanChoice == "rock" && computerChoice == "paper") {
-        console.log("You lose! Paper beats Rock.");
+        result = "You lose! Paper beats Rock.";
         computerScore++;
     }
     else if (humanChoice == "rock" && computerChoice == "scissors") {
-        console.log("You win! Rock beats Scissors.");
+        result = "You win! Rock beats Scissors.";
         humanScore++;
     }
     else if (humanChoice == "paper" && computerChoice == "rock") {
-        console.log("You win! Paper beats Rock.");
+        result = "You win! Paper beats Rock.";
         humanScore++;
     }
     else if (humanChoice == "paper" && computerChoice == "scissors") {
-        console.log("You lose! Scissors beat Paper.");
+        result = "You lose! Scissors beat Paper.";
         computerScore++;
     }
     else if (humanChoice == "scissors" && computerChoice == "rock") {
-        console.log("You lose! Rock beats Scissors.");
+        result = "You lose! Rock beats Scissors.";
         computerScore++;
     }
     else if (humanChoice == "scissors" && computerChoice == "paper") {
-        console.log("You win! Scissors beat Paper.");
+        result = "You win! Scissors beat Paper.";
         humanScore++;
     }
     else {
-        console.log("It's a Draw!");
+        result = "It's a Draw!";
     }
+
+    return result;
 }
 
 
 
+function playGame(humanChoice) {
+    const computerSelection = getComputerChoice();
+    // console.log(humanChoice, computerSelection);
+    const result = playRound(humanChoice, computerSelection);
 
-function playGame() {
-    for (let i = 1; i <= 5; i++) {
-        const humanSelection = getHumanChoice();
-        const computerSelection = getComputerChoice();
-        playRound(humanSelection, computerSelection);
+    document.getElementById("resultDisplay").textContent = result;
+    document.getElementById('scoreDisplay').textContent = "Human Score:" + humanScore + "Computer Score:" + computerScore;
+    
 
-        console.log("Your current score is " + humanScore);
-        console.log("Computer's current score is " + computerScore);
-    }
-    let winner = "No one won";
-    if (humanScore > computerScore){
-        winner = "You won!"
-    }
-    else {
-        winner = "You lost!"
-    }
-
-    console.log(winner);
 }
 
-playGame();
+
+//     let winner = "No one won";
+//     if (humanScore > computerScore){
+//         winner = "You won!"
+//     }
+//     else {
+//         winner = "You lost!"
+//     }
+
+//     console.log(winner);
+// }
+
+
+
+
+
+const rock = document.createElement('button');
+const paper = document.createElement('button');
+const scissors = document.createElement('button');
+
+rock.addEventListener('click', () => playGame('rock'));
+rock.textContent = "Rock";
+paper.addEventListener('click', () => playGame('paper'));
+paper.textContent = "Paper";
+scissors.addEventListener('click', () => playGame('scissors'));
+scissors.textContent = "Scissors";
+
+const container = document.getElementById('container')
+container.appendChild(rock);
+container.appendChild(paper);
+container.appendChild(scissors);
+
+
+
+
