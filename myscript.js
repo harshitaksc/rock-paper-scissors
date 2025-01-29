@@ -67,27 +67,31 @@ function playRound(humanChoice, computerChoice) {
 
 
 function playGame(humanChoice) {
-    const computerSelection = getComputerChoice();
-    // console.log(humanChoice, computerSelection);
-    const result = playRound(humanChoice, computerSelection);
+    let computerSelection = getComputerChoice();
+    
+    
+        console.log(humanChoice, computerSelection);
+    let result = playRound(humanChoice, computerSelection);
 
     document.getElementById("resultDisplay").textContent = result;
-    document.getElementById('scoreDisplay').textContent = "Human Score:" + humanScore + "Computer Score:" + computerScore;
+    document.getElementById('scoreDisplay').textContent = "Human Score:" + humanScore +  "   " + "Computer Score:" + computerScore;
+    
+    computerSelection = getComputerChoice();
+
+    let winner = "No one won";
+    if (humanScore === 10 || computerScore === 10) {
+        let winner = (humanScore > computerScore) ? "You won!" : "You lost!";
+        document.getElementById("winnerDisplay").textContent = winner;
+
+        // Disable buttons after the game ends
+        document.querySelectorAll("button").forEach(btn => btn.disabled = true);
+    }
     
 
 }
 
 
-//     let winner = "No one won";
-//     if (humanScore > computerScore){
-//         winner = "You won!"
-//     }
-//     else {
-//         winner = "You lost!"
-//     }
 
-//     console.log(winner);
-// }
 
 
 
